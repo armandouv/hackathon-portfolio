@@ -37,6 +37,10 @@ def get_profile(name):
     return render_template('profile.html', item=profiles[name], title=title, url=profiles_base_url + name)
 
 
+@app.route('/health')
+def get_health():
+    return '', 200
+
 @app.errorhandler(404)
 def page_not_found(e):
     return render_template('404.html', title="Page not found"), 404

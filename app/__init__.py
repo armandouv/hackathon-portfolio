@@ -1,4 +1,5 @@
 import os
+from . import db
 
 from dotenv import load_dotenv
 from flask import Flask, render_template, abort
@@ -7,6 +8,8 @@ from data.load_data import load_projects, load_profiles
 
 load_dotenv()
 app = Flask(__name__)
+app.config['DATABASE'] = os.path.join(os.getcwd(), 'flask.sqlite')
+db.init_app(app)
 
 base_url = os.getenv("URL")
 projects_base_url = base_url + "/projects/"

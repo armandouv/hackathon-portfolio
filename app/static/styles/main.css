@@ -24,6 +24,13 @@ body {
     padding: 1.3em 3em;
 }
 
+.nav-content {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 .nav-content .logo-touch-target {
     display: inline-flex;
     height: 60%;
@@ -76,6 +83,14 @@ body {
 
 .profile .profile-picture {
     margin-bottom: 0.5em;
+}
+
+.header-buttons {
+    display: flex;
+}
+
+.ml-1 {
+    margin-left: 1rem;
 }
 
 .banner {
@@ -182,6 +197,10 @@ main {
 
 /** Responsive styles**/
 @media only screen and (max-width: 1120px) {
+    .nav-bar {
+        padding: 1.5em;
+    }
+
     .grid-container {
         justify-items: center;
     }
@@ -224,5 +243,19 @@ main {
 
     .github-link-container {
         margin-bottom: 1.3em;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .nav-logo img {
+        width: 160px;
+    }
+
+    .header-buttons a {
+        font-size: 0.8rem;
+    }
+
+    .ml-1 {
+        margin-left: 0.5rem;
     }
 }

@@ -78,7 +78,7 @@ def register():
         else:
             return error, 418
 
-    return render_template("register.html")
+    return render_template("register.html", title="Sign up")
 
 
 @app.route('/login', methods=('GET', 'POST'))
@@ -102,4 +102,4 @@ def login():
         else:
             return error, 418
 
-    return render_template("login.html")
+    return render_template("login.html", title="Login")

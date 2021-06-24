@@ -1,13 +1,12 @@
 import os
-from . import db
-
-from werkzeug.security import generate_password_hash, check_password_hash
-from app.db import get_db
 
 from dotenv import load_dotenv
 from flask import Flask, render_template, abort, request
+from werkzeug.security import generate_password_hash, check_password_hash
 
+from app.db import get_db
 from data.load_data import load_projects, load_profiles
+from . import db
 
 load_dotenv()
 app = Flask(__name__)
@@ -79,8 +78,7 @@ def register():
         else:
             return error, 418
 
-    ## TODO: Return a register page
-    return "Register Page not yet implemented", 501
+    return render_template("register.html")
 
 
 @app.route('/login', methods=('GET', 'POST'))

@@ -167,6 +167,19 @@ h3 i {
     margin-left: 0.5rem;
 }
 
+.flex {
+    display: flex;
+}
+
+main {
+    min-height: 74vh;
+}
+
+.signup-container {
+    align-items: center;
+    justify-content: center;
+}
+
 /** Responsive styles**/
 @media only screen and (max-width: 1120px) {
     .grid-container {

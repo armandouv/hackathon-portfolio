@@ -1,4 +1,4 @@
-BASE_URL=https://armandouv.duckdns.org/
+BASE_URL=armandouv.duckdns.org/
 CURRENT_URL=$BASE_URL
 NEW_USERNAME=holamundo2
 NEW_PASSWORD=hola

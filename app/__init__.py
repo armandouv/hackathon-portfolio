@@ -2,10 +2,9 @@ import os
 
 from dotenv import load_dotenv
 from flask import Flask, render_template, abort, request
-from werkzeug.security import generate_password_hash, check_password_hash
-
-from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
+from flask_sqlalchemy import SQLAlchemy
+from werkzeug.security import generate_password_hash, check_password_hash
 
 from data.load_data import load_projects, load_profiles
 
@@ -65,7 +64,8 @@ def get_project(name):
     if name not in projects:
         return abort(404)
     return render_template(
-        "project.html", item=projects[name], title=name, url=projects_base_url + name
+        "project.html", item=projects[name],
+        title=name, url=projects_base_url + name
     )
 
 
@@ -75,7 +75,8 @@ def get_profile(name):
         return abort(404)
     title = name + "'s Profile"
     return render_template(
-        "profile.html", item=profiles[name], title=title, url=profiles_base_url + name
+        "profile.html", item=profiles[name],
+        title=title, url=profiles_base_url + name
     )
 
 

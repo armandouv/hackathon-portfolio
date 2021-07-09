@@ -17,8 +17,8 @@ def load_items_as_dict(path: str) -> dict:
 
 
 def load_projects() -> dict:
-    return load_items_as_dict('data/projects.json')
+    return load_items_as_dict("data/projects.json")
 
 
 def load_profiles() -> dict:
-    return load_items_as_dict('data/profiles.json')
+    return load_items_as_dict("data/profiles.json")

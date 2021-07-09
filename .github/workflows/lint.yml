@@ -22,6 +22,7 @@ jobs:
         with:
           black: true
           flake8: true
+          auto_fix: true
 on:
   push:
     branches:

@@ -64,8 +64,7 @@ def get_project(name):
     if name not in projects:
         return abort(404)
     return render_template(
-        "project.html", item=projects[name],
-        title=name, url=projects_base_url + name
+        "project.html", item=projects[name], title=name, url=projects_base_url + name
     )
 
 
@@ -75,8 +74,7 @@ def get_profile(name):
         return abort(404)
     title = name + "'s Profile"
     return render_template(
-        "profile.html", item=profiles[name],
-        title=title, url=profiles_base_url + name
+        "profile.html", item=profiles[name], title=title, url=profiles_base_url + name
     )
 
 

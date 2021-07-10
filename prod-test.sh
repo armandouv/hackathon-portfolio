@@ -2,38 +2,39 @@ BASE_URL=https://armandouv.duckdns.org/
 CURRENT_URL=$BASE_URL
 NEW_USERNAME=$(openssl rand -base64 12)
 NEW_PASSWORD=hola
-red=`tput setaf 1`
-green=`tput setaf 2`
+TERM="xterm"
+red=$(tput setaf 1)
+green=$(tput setaf 2)
 
 compare_status() {
-    if [ $1 == $2 ]
+    if [ "$1" == "$2" ]
     then
-        echo $green"Passed"
+        echo "$green""Passed"
     else
-        echo $red"Failed"
+        echo "$red""Failed"
         exit 1
     fi
-    reset=`tput sgr0`
-    echo $reset
+    reset=$(tput sgr0)
+    echo "$reset"
 }
 
 expect_get_status() {
     STATUS_CODE=$(curl -s --ignore-content --head $CURRENT_URL | head -1 | cut -d " " -f 2)
-    compare_status $1 $STATUS_CODE
+    compare_status "$1" "$STATUS_CODE"
 }
 
 expect_post_status() {
-    STATUS_CODE=$(curl -w "%{http_code}" -X POST -d $2 $CURRENT_URL -s -o /dev/null)
-    compare_status $1 $STATUS_CODE
+    STATUS_CODE=$(curl -w "%{http_code}" -X POST -d "$2" $CURRENT_URL -s -o /dev/null)
+    compare_status "$1" "$STATUS_CODE"
 }
 
 print_url()
 {
     echo
-    yellow=`tput setaf 3`
-    echo ${yellow}$1
-    reset=`tput sgr0`
-    echo $reset
+    yellow=$(tput setaf 3)
+    echo "${yellow}""$1"
+    reset=$(tput sgr0)
+    echo "$reset"
 }
 
 

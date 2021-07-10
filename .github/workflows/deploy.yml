@@ -37,8 +37,12 @@ jobs:
       - name: Check container status
         run: ssh my-vm 'cd ${{ secrets.PROJECT_ROOT }} && docker-compose ps'
 
-      - name: Send deploy message to Discord
+      - name: Send successful deployment message to Discord
         run: curl -s -X POST "${{ secrets.DISCORD_WEBHOOK }}" -d "content=🚀 Deployment Successful"
 
       - name: Run endpoint tests
         run: bash prod-test.sh
+
+      - name: Send failed deployment message to Discord
+        if: ${{ failure() }}
+        run: curl -s -X POST "${{ secrets.DISCORD_WEBHOOK }}" -d "content=🚨 Deployment Failed"

@@ -1,6 +1,6 @@
-BASE_URL=armandouv.duckdns.org/
+BASE_URL=https://armandouv.duckdns.org/
 CURRENT_URL=$BASE_URL
-NEW_USERNAME=holamundo2
+NEW_USERNAME=$(openssl rand -base64 12)
 NEW_PASSWORD=hola
 red=`tput setaf 1`
 green=`tput setaf 2`

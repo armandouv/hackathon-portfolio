@@ -109,3 +109,5 @@ expect_post_status 418 "username=FGSFD&password=$NEW_PASSWORD"
 
 echo "Invalid user login (incorrect password):"
 expect_post_status 418 "username=$NEW_USERNAME&password=invalid"
+
+exit 1

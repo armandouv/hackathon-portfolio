@@ -11,6 +11,9 @@ jobs:
     name: "Deploy to AWS EC2 Virtual Machine"
     runs-on: ubuntu-latest
     steps:
+      - name: Check out Git repository
+        uses: actions/checkout@v2
+
       - name: Configure SSH
         run: |
           mkdir -p ~/.ssh/
@@ -36,3 +39,6 @@ jobs:
 
       - name: Send deploy message to Discord
         run: curl -s -X POST "${{ secrets.DISCORD_WEBHOOK }}" -d "content=🚀 Deployment Successful"
+
+      - name: Run endpoint tests
+        run: bash prod-test.sh

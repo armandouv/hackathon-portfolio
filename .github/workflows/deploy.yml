@@ -38,7 +38,7 @@ jobs:
         run: ssh my-vm 'cd ${{ secrets.PROJECT_ROOT }} && docker-compose ps'
 
       - name: Run endpoint tests
-        run: export TERM=xterm && bash prod-test.sh
+        run: sleep 30s && export TERM=xterm && bash prod-test.sh
 
       - name: Send failed deployment message to Discord
         if: ${{ failure() }}

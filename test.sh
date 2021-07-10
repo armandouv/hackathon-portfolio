@@ -11,6 +11,7 @@ compare_status() {
         echo $green"Passed"
     else
         echo $red"Failed"
+        exit 1
     fi
     reset=`tput sgr0`
     echo $reset

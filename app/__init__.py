@@ -6,7 +6,7 @@ from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 
-from data.load_data import load_projects, load_profiles
+from data.load_data import load_posts_info
 
 load_dotenv()
 app = Flask(__name__)
@@ -41,40 +41,28 @@ class UserModel(db.Model):
 
 
 base_url = os.getenv("URL")
-projects_base_url = base_url + "/projects/"
-profiles_base_url = base_url + "/profiles/"
+posts_base_url = base_url + "/posts/"
 
-projects = load_projects()
-profiles = load_profiles()
+posts_info = load_posts_info()
 
 
 @app.route("/")
 def index():
     return render_template(
         "index.html",
-        profiles=profiles,
-        projects=projects,
-        title="Team Kenargi's portfolio",
+        posts=posts_info,
+        title="Blog",
         url=base_url,
     )
 
 
-@app.route("/projects/<name>")
-def get_project(name):
-    if name not in projects:
+@app.route("/profiles/<post_id>")
+def get_post(post_id):
+    if post_id not in posts_info:
         return abort(404)
+    title = "Post title"
     return render_template(
-        "project.html", item=projects[name], title=name, url=projects_base_url + name
-    )
-
-
-@app.route("/profiles/<name>")
-def get_profile(name):
-    if name not in profiles:
-        return abort(404)
-    title = name + "'s Profile"
-    return render_template(
-        "profile.html", item=profiles[name], title=title, url=profiles_base_url + name
+        "profile.html", item=posts_info[post_id], title=title, url=posts_base_url + post_id
     )
 
 

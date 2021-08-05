@@ -14,14 +14,14 @@
     <h2>Posts</h2>
 
     <div class="grid-container">
-        {% for profile in profiles.values() %}
+        {% for post in posts.values() %}
             <figure class="card person-card">
-                <img src="{{ profile.image }}" alt="Kenargi Member" class="card-img-top">
+                <img src="{{ post.image }}" alt="Poster" class="card-img-top">
                 <figcaption class="card-body">
-                    <a href="/profiles/{{ profile.name }}" class="stretched-link">
-                        <h5 class="card-title">{{ profile.name }}</h5>
+                    <a href="/posts/{{ post.id }}" class="stretched-link">
+                        <h5 class="card-title">{{ post.title }}</h5>
                     </a>
-                    <p class="card-text">{{ profile.location }} </p>
+                    {#                    <p class="card-text">{{ post.location }} </p>#}
                 </figcaption>
             </figure>
         {% endfor %}

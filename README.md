@@ -42,12 +42,12 @@ pip install -r requirements.txt
 
 Create a .env file using the example.env template
 
+Create a nginx-certbot.env file using the example-nginx-certbot.env template
 
-Start flask development server
+
+Start detached server using Docker Compose
 ```bash
-$ export FLASK_ENV=development
-$ export URL=localhost:5000 
-$ flask run
+$ docker-compose up -d
 ```
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.

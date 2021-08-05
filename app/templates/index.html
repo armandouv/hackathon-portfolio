@@ -1,24 +1,17 @@
 {% include 'header.html' %}
 
-<div class="profile">
-    <div class="profile-picture">
-        <img class="rounded-circle" src="/static/img/panturthawk.jpg" alt="Kenargi mascot">
-    </div>
-    <h1>Team Kenargi</h1>
-</div>
-
 <section class="container home-section">
-    <h2>About Team Kenargi</h2>
+    <h2>Best blog in the world</h2>
     <p>
-        Welcome to team Kenargi's portfolio. We are in the MLH Fellowship Production Engineering program (pod 3.3.5).
-        Our team name is Kenargi, a made-up word derived from the letters of our names. Our team mascot is a
-        panda-turtle-hawk to represent that 3 people are better than one, especially when working on production-grade
-        projects!
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad doloremque explicabo fuga reiciendis sequi sint
+        sunt! Alias, autem dolorem doloribus ex excepturi nam quae quas quis, ratione, tempora totam voluptates.
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur delectus deserunt eos est ex expedita
+        explicabo itaque, nam nemo nulla officia officiis praesentium quae quasi reiciendis rem, vel. Cum, tenetur?
     </p>
 </section>
 
 <section class="container home-section">
-    <h2>Introducing the team members</h2>
+    <h2>Posts</h2>
 
     <div class="grid-container">
         {% for profile in profiles.values() %}
@@ -34,26 +27,6 @@
         {% endfor %}
     </div>
 </section>
-
-
-<section class="container home-section">
-    <h2>Projects</h2>
-
-    <div class="grid-container">
-        {% for project in projects.values() %}
-            <figure class="card person-card">
-                <img src="{{ project.image }}" alt="Kenargi Project" class="card-img-top">
-                <figcaption class="card-body">
-                    <a href="/projects/{{ project.name }}" class="stretched-link">
-                        <h5 class="card-title">{{ project.name }}</h5>
-                    </a>
-                    <p class="card-text">{{ project.description }}</p>
-                </figcaption>
-            </figure>
-        {% endfor %}
-    </div>
-</section>
-
 
 {% include 'footer.html' %}
 

@@ -41,6 +41,7 @@ pip install -r requirements.txt
 ## Usage
 
 Create a .env file using the example.env template
+Create a nginx-certbot.env file using the example-nginx-certbot.env template
 
 
 Start flask development server

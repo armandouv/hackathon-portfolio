@@ -167,6 +167,21 @@ def edit_post(post_id):
     return redirect("https://localhost/posts/" + str(post.id))
 
 
+@app.route("/posts/<post_id>/delete")
+@login_required
+def delete_post(post_id):
+    post = PostModel.query.filter_by(id=post_id).first()
+    if post is None:
+        return abort(404)
+    if post.created_by != current_user.id:
+        return abort(403)
+
+    db.session.delete(post)
+    db.session.commit()
+
+    return redirect("https://localhost")
+
+
 @app.route("/health")
 def get_health():
     return "", 200

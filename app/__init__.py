@@ -1,4 +1,5 @@
 import os
+import datetime
 
 from dotenv import load_dotenv
 from flask import Flask, render_template, request, session, redirect, url_for, abort
@@ -52,6 +53,21 @@ class UserModel(UserMixin, db.Model):
     first_name = db.Column(db.String(80), nullable=False)
     last_name = db.Column(db.String(80), nullable=False)
 
+    def is_active(self):
+        # all users are active
+        return True
+
+    def get_id(self):
+        # returns the user id
+        return self.id
+
+    def is_authenticated(self):
+        return self.authenticated
+
+    def is_anonymous(self):
+        # False as we do not support annonymity
+        return False
+
     def repr(self):
         return "<User %r>" % self.username
 
@@ -64,8 +80,12 @@ class PostModel(UserMixin, db.Model):
     )  # primary keys are required by SQLAlchemy
     title = db.Column(db.String(40), nullable=False)
     text = db.Column(db.String(180), nullable=False)
-    date_created = db.Column(db.DateTime, nullable=False)
-    last_modificacion = db.Column(db.DateTime, nullable=False)
+    date_created = db.Column(
+        db.DateTime, nullable=False, default=datetime.datetime.utcnow
+    )
+    last_modificacion = db.Column(
+        db.DateTime, nullable=False, default=datetime.datetime.utcnow
+    )
     created_by = db.Column(db.ForeignKey("users.id"), nullable=False)
 
 
@@ -125,10 +145,34 @@ def page_not_found(e):
 
 @app.route("/addpost", methods=("GET", "POST"))
 def addpost():
-    if session["username"] in session:
-        return render_template("index.html", title="Home")
+    if request.method == "POST":
+        title = request.form.get("title")
+        text = request.form.get("text")
+        userid = UserModel.query.get(repr)
+        error = None
+
+        if not title:
+            error = "Username is required."
+        elif not text:
+            error = "Password is required."
+
+        if error is None:
+            new_post = PostModel(
+                title,
+                text,
+                userid,
+            )
+            db.session.add(new_post)
+            db.session.commit()
+            return redirect(url_for("app.index"))
+        else:
+            return error, 418
     else:
-        return render_template("login.html", title="Login")
+        flag = UserModel.query.get(is_authenticated)
+        if flag is False:
+            return redirect(url_for("app.index"))
+        else:
+            return redirect(url_for("app.index"))
 
 
 @app.route("/register", methods=("GET", "POST"))
@@ -160,11 +204,11 @@ def register():
             )
             db.session.add(new_user)
             db.session.commit()
-            return redirect(url_for("auth.login"))
+            return redirect(url_for("app.login"))
         else:
             return error, 418
 
-    return redirect(url_for("auth.login"))
+    render_template("register.html")
     # return render_template("register.html", title="Sign up")
 
 
@@ -187,9 +231,9 @@ def login():
             return redirect(url_for("main.index"))
         else:
             flash("Please check your login details and try again.")
-            return redirect(url_for("auth.login"))
+            return redirect(url_for("app.login"))
 
-    return redirect(url_for("main.index"))
+    return render_template("login.html")
 
 
 @app.route("/logout")
@@ -197,4 +241,4 @@ def login():
 def logout():
     # remove the username from the session if it's there
     logout_user()
-    return redirect(url_for("main.index"))
+    return redirect(url_for("app.index"))

@@ -11,8 +11,6 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import DateTime, func
 from werkzeug.security import generate_password_hash, check_password_hash
 
-from data.load_data import load_posts_info
-
 load_dotenv()
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.getenv("SECRET_KEY")
@@ -85,10 +83,6 @@ posts_base_url = base_url + "/posts/"
 def load_user(user_id):
     # since the user_id is just the primary key of our user table, use it in the query for the user
     return UserModel.query.get(int(user_id))
-
-
-# TODO: This will be deleted since posts will be stored in the database
-posts_info = load_posts_info()
 
 
 @app.route("/")

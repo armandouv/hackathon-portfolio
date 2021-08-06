@@ -2,6 +2,10 @@ import os
 
 from dotenv import load_dotenv
 from flask import Flask, render_template, abort, request
+from flask_login import (
+    LoginManager,
+    UserMixin,
+)
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -23,14 +27,23 @@ app.config[
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 db = SQLAlchemy(app)
+db.init_app(app)
 migrate = Migrate(app, db)
 
+login_manager = LoginManager()
+login_manager.login_view = "auth.login"
+login_manager.init_app(app)
 
-class UserModel(db.Model):
-    __tablename__ = "users"
 
-    username = db.Column(db.String(), primary_key=True)
-    password = db.Column(db.String())
+class UserModel(UserMixin, db.Model):
+    __tablename__ = "user"
+    id = db.Column(
+        db.Integer, primary_key=True
+    )  # primary keys are required by SQLAlchemy
+    email = db.Column(db.String(100), unique=True)
+    firstname = db.Column(db.String(1000))
+    lastname = db.Column(db.String(1000))
+    password = db.Column(db.String(100))
 
     def __init__(self, username, password):
         self.username = username
@@ -40,8 +53,27 @@ class UserModel(db.Model):
         return f"<User {self.username}>"
 
 
+class PostModel(UserMixin, db.Model):
+    __tablename__ = "post"
+    id_post = db.Column(
+        db.Integer, primary_key=True
+    )  # primary keys are required by SQLAlchemy
+    title = db.Column(db.String(100))
+    text = db.Column(db.String(1000))
+    creation_date = db.Column(db.DateTime)
+    modification_date = db.Column(db.DateTime)
+    created_by = db.Column(db.ForeignKey("user.id"))
+
+
 base_url = os.getenv("URL")
 posts_base_url = base_url + "/posts/"
+
+
+@login_manager.user_loader
+def load_user(user_id):
+    # since the user_id is just the primary key of our user table, use it in the query for the user
+    return UserModel.query.get(int(user_id))
+
 
 # TODO: This will be deleted since posts will be stored in the database
 posts_info = load_posts_info()

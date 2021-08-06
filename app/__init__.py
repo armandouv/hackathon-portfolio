@@ -47,10 +47,13 @@ class UserModel(UserMixin, db.Model):
     id = db.Column(
         db.Integer, primary_key=True
     )  # primary keys are required by SQLAlchemy
-    email = db.Column(db.String(100), unique=True)
-    firstname = db.Column(db.String(1000))
-    lastname = db.Column(db.String(1000))
-    password = db.Column(db.String(100))
+    username = db.Column(db.String(80), unique=True, nullable=False)
+    email = db.Column(db.String(120), unique=True, nullable=False)
+    first_name = db.Column(db.String(80), nullable=False)
+    last_name = db.Column(db.String(80), nullable=False)
+
+    def repr(self):
+        return "<User %r>" % self.username
 
 
 class PostModel(UserMixin, db.Model):
@@ -58,11 +61,15 @@ class PostModel(UserMixin, db.Model):
     id_post = db.Column(
         db.Integer, primary_key=True
     )  # primary keys are required by SQLAlchemy
-    title = db.Column(db.String(100))
-    text = db.Column(db.String(1000))
-    creation_date = db.Column(db.DateTime)
-    modification_date = db.Column(db.DateTime)
-    created_by = db.Column(db.ForeignKey("users.id"))
+    title = db.Column(db.String(40), nullable=False)
+    text = db.Column(db.String(180), nullable=False)
+    date_created = db.Column(
+        "timestamp", TIMESTAMP(timezone=False), nullable=False, default=datetime.now()
+    )
+    last_modificacion = db.Column(
+        "timestamp", TIMESTAMP(timezone=False), nullable=False, default=datetime.now()
+    )
+    created_by = db.Column(db.ForeignKey("users.id"), nullable=False)
 
 
 @login_manager.user_loader
@@ -130,6 +137,8 @@ def addpost():
 @app.route("/register", methods=("GET", "POST"))
 def register():
     if request.method == "POST":
+        firstname = request.form.get("firstname")
+        lastname = request.form.get("lastname")
         username = request.form.get("username")
         password = request.form.get("password")
         error = None
@@ -143,11 +152,14 @@ def register():
 
         if user:
             flash("Email address already exists")
-            return redirect(url_for("auth.signup"))
+            return redirect(url_for("auth.login"))
 
         if error is None:
             new_user = UserModel(
-                username, generate_password_hash(password, method="sha256")
+                firstname,
+                lastname,
+                username,
+                generate_password_hash(password, method="sha256"),
             )
             db.session.add(new_user)
             db.session.commit()

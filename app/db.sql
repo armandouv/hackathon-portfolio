@@ -1,7 +1,7 @@
 DROP TABLE IF EXISTS user;
 DROP TABLE IF EXISTS post;
 
-CREATE TABLE user (
+CREATE TABLE users (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   username TEXT UNIQUE NOT NULL,
   password TEXT NOT NULL,
@@ -16,5 +16,5 @@ CREATE TABLE post (
   modification_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   title TEXT NOT NULL,
   text TEXT NOT NULL,
-  FOREIGN KEY (created_by) REFERENCES user (id)
+  FOREIGN KEY (created_by) REFERENCES users (id)
 );

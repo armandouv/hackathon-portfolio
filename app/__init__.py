@@ -48,6 +48,7 @@ def load_user(user_id):
     return UserModel.query.get(int(user_id))
 
 
+"""
 # blueprint for auth routes in our app
 from .auth import auth as auth_blueprint
 
@@ -56,7 +57,7 @@ app.register_blueprint(auth_blueprint)
 # blueprint for non-auth parts of app
 from .main import main as main_blueprint
 
-app.register_blueprint(main_blueprint)
+app.register_blueprint(main_blueprint)"""
 
 migrate = Migrate(app, db)
 
@@ -70,7 +71,7 @@ profiles = load_profiles()
 # return app
 
 
-@main.route("/")
+@app.route("/")
 def index():
     return render_template("index.html", title="Team Kenargi's portfolio")
 

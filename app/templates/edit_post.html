@@ -1,0 +1,24 @@
+{% include 'header.html' %}
+
+<main class="flex signup-container">
+    <section>
+        <h2>Edit post</h2>
+        <form action="/posts" method="post">
+            <div class="form-group">
+                <label for="inputTitle">Edit title</label>
+                <input type="text" class="form-control" id="inputTitle" name="title" value="{{ post.title }}"
+                       placeholder="Edit post title">
+            </div>
+            <div class="form-group mt-3">
+                <label for="inputText">Edit body</label>
+                <textarea rows="5" cols="50" id="inputText" name="text">
+                    {{ post.text }}
+                </textarea>
+            </div>
+            <button type="submit" class="btn btn-primary mt-4">Submit</button>
+        </form>
+    </section>
+</main>
+
+
+{% include 'footer.html' %}

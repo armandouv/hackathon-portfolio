@@ -57,6 +57,7 @@ class UserModel(UserMixin, db.Model):
         return "<User %r>" % self.username
 
 
+# default=DateTime.now()
 class PostModel(UserMixin, db.Model):
     __tablename__ = "post"
     id_post = db.Column(
@@ -64,12 +65,8 @@ class PostModel(UserMixin, db.Model):
     )  # primary keys are required by SQLAlchemy
     title = db.Column(db.String(40), nullable=False)
     text = db.Column(db.String(180), nullable=False)
-    date_created = db.Column(
-        "timestamp", TIMESTAMP(timezone=False), nullable=False, default=datetime.now()
-    )
-    last_modificacion = db.Column(
-        "timestamp", TIMESTAMP(timezone=False), nullable=False, default=datetime.now()
-    )
+    date_created = db.Column(db.DateTime, nullable=False)
+    last_modificacion = db.Column(db.DateTime, nullable=False)
     created_by = db.Column(db.ForeignKey("users.id"), nullable=False)
 
 

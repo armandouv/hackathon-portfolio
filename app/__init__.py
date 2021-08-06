@@ -5,11 +5,10 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 
 db = SQLAlchemy()
-load_dotenv()
-app = Flask(__name__)
 
 
 def create_app():
+    app = Flask(__name__)
     app.config["SECRET_KEY"] = "t4{pt_+FS3T#G\Gfs/F"
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
     app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///db.sql"
@@ -46,10 +45,9 @@ def create_app():
 
     app.register_blueprint(main_blueprint)
 
+    migrate = Migrate(app, db)
+
     return app
-
-
-migrate = Migrate(app, db)
 
 
 @app.route("/")

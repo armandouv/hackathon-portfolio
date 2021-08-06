@@ -1,6 +1,6 @@
 import os
 
-from flask import Blueprint, render_template, abort
+from flask import Blueprint, render_template
 from . import db
 from data.load_data import load_projects, load_profiles
 from flask_login import login_required, current_user

@@ -6,6 +6,7 @@ from flask.helpers import flash
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
+from data.load_data import load_projects, load_profiles
 from flask_login import (
     LoginManager,
     login_user,
@@ -14,11 +15,8 @@ from flask_login import (
     current_user,
     UserMixin,
 )
-from data.load_data import load_projects, load_profiles
 
 load_dotenv()
-db = SQLAlchemy()
-
 
 # def create_app():
 app = Flask(__name__)
@@ -35,6 +33,7 @@ app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///db.sql"
     table=os.getenv("POSTGRES_DB"),
 )"""
 
+db = SQLAlchemy(app)
 db.init_app(app)
 migrate = Migrate(app, db)
 

@@ -1,0 +1,33 @@
+{% include 'header.html' %}
+
+<main class="flex signup-container">
+    <section>
+        <h2>Sign up</h2>
+        <form method="post">
+            <div class="form-group">
+                <label for="inputEmail">Email</label>
+                <input type="text" class="form-control" id="inputEmail" name="email"
+                       placeholder="Enter email address">
+            </div>
+            <div class="form-group">
+                <label for="inputFirstname">First name</label>
+                <input type="text" class="form-control" id="inputFirstname" name="firstname"
+                       placeholder="Enter first name">
+            </div>
+            <div class="form-group">
+                <label for="inputLastname">Last name</label>
+                <input type="text" class="form-control" id="inputLastname" name="lastname"
+                       placeholder="Enter last name">
+            </div>
+            <div class="form-group mt-3">
+                <label for="inputPassword">Password</label>
+                <input type="password" class="form-control" id="inputPassword" placeholder="Password" name="password">
+            </div>
+            <button type="submit" class="btn btn-primary mt-4">Submit</button>
+        </form>
+    </section>
+</main>
+
+
+{% include 'footer.html' %}
+

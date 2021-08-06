@@ -8,6 +8,7 @@ from flask_login import (
 )
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import DateTime, func
 from werkzeug.security import generate_password_hash, check_password_hash
 
 from data.load_data import load_posts_info
@@ -50,16 +51,24 @@ class UserModel(UserMixin, db.Model):
         return f"<User {self.username}>"
 
 
-class PostModel(UserMixin, db.Model):
+class PostModel(db.Model):
     __tablename__ = "post"
-    id_post = db.Column(
+    id = db.Column(
         db.Integer, primary_key=True
     )  # primary keys are required by SQLAlchemy
     title = db.Column(db.String(1000))
     text = db.Column(db.String(1000))
-    creation_date = db.Column(db.DateTime)
-    modification_date = db.Column(db.DateTime)
+    creation_date = db.Column(DateTime(timezone=True), server_default=func.now())
+    modification_date = db.Column(DateTime(timezone=True), onupdate=func.now())
     created_by = db.Column(db.ForeignKey("user.id"))
+
+    def __init__(self, title, text, created_by):
+        self.title = title
+        self.text = text
+        self.created_by = created_by
+
+    def __repr__(self):
+        return f"<Post {self.title}>"
 
 
 db.init_app(app)
@@ -96,12 +105,11 @@ def index():
 
 @app.route("/posts/<post_id>")
 def get_post(post_id):
-    # TODO: query post from db
-    if post_id not in posts_info:
+    post = PostModel.query.filter_by(id=post_id).first()
+    if post is None:
         return abort(404)
-    title = posts_info[post_id]["title"]
     return render_template(
-        "post.html", post=posts_info[post_id], title=title, url=posts_base_url + post_id
+        "post.html", post=post, title=post.title, url=posts_base_url + post_id
     )
 
 
@@ -126,7 +134,17 @@ def get_create_post():
         return render_template("login.html", title="Login")
 
 
-# TODO: Implement create and edit post endpoints
+# TODO: Implement edit post endpoint
+
+@app.route("/posts", methods=["POST"])
+@login_required
+def create_post():
+    title = request.form.get("title")
+    text = request.form.get("text")
+    new_post = PostModel(title, text, current_user.id)
+    db.session.add(new_post)
+    db.session.commit()
+    return redirect("https://localhost/posts/" + str(new_post.id))
 
 
 @app.route("/health")

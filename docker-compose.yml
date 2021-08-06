@@ -5,7 +5,7 @@ services:
     build: .
     restart: always
     env_file:
-      - .env
+      - ./example.env
     volumes:
       - .:/myportfolio
     depends_on:
@@ -16,7 +16,7 @@ services:
     image: postgres
     restart: always
     env_file:
-      - .env
+      - ./example.env
 
   nginx:
     container_name: nginx
@@ -46,4 +46,5 @@ services:
       - /var/lib/docker/:/var/lib/docker:ro
 
 volumes:
-    nginx_secrets:
+  mydatabase:
+  nginx_secrets:

@@ -1,25 +1,18 @@
-<img src=https://img.shields.io/github/license/kendrajmoore/hackathon-portfolio>
-<p align="center">
- <img width="460" src="https://user-images.githubusercontent.com/51943194/121562739-98dd0680-c9ce-11eb-897a-579780e50c9a.jpg">
-</p>
+# Blog website
+by Moisés, Armando, Oscar and Anthony from Pod 3.3.5
 
-# Team KENARGI Portfolio Webpage
-by Armando, Gigi, Kendra, Pod 3.3.5
-
-## Introduction
-
-Design and maintain a portfolio website for our open-source projects.
 
 ## Description
 
-Working as a team, we created a website to track our projects and accomplishments. 
+A blog website.
+
 
 ## Technologies Used
 
 - Python-Flask
 - HTML
 - CSS
-- JSON
+- Postgres
 
 ## Installation
 
@@ -49,6 +42,17 @@ Start detached server using Docker Compose
 ```bash
 $ docker-compose up -d
 ```
+
+## Usage with Github actions
+
+Set up the following secrets:
+- DISCORD_WEBHOOK
+- PROJECT_ROOT
+- SSH_IP
+- SSH_PRIVATE_KEY
+- SSH_USER
+
+
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 

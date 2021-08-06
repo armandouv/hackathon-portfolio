@@ -14,7 +14,9 @@ A blog website.
 - CSS
 - Postgres
 
-## Installation
+## Development
+
+Spin up Postgres Server
 
 Make sure you have python3 and pip installed
 
@@ -31,7 +33,7 @@ Use the package manager [pip](https://pip.pypa.io/en/stable/) to install all dep
 pip install -r requirements.txt
 ```
 
-## Usage
+## Deployment
 
 Create a .env file using the example.env template
 
@@ -43,7 +45,7 @@ Start detached server using Docker Compose
 $ docker-compose up -d
 ```
 
-## Usage with Github actions
+## Deployment with Github Actions
 
 Set up the following secrets:
 - DISCORD_WEBHOOK

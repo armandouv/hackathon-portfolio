@@ -93,13 +93,25 @@ posts_info = load_posts_info()
 
 @app.route("/")
 def index():
-    # TODO: Implement pagination
+    page = request.args.get("page")
+
+    if page and not page.isdigit():
+        return abort(404)
+
+    if page is None:
+        page = 1
+
+    page = int(page)
+    posts_query = PostModel.query.order_by(PostModel.id.desc()).paginate(page, 12, False)
+
     return render_template(
         "index.html",
-        # TODO: query posts info page from db
-        posts=posts_info,
+        posts=posts_query.items,
         title="Blog",
         url=base_url,
+        current_page=page,
+        has_previous_page=posts_query.has_prev,
+        has_next_page=posts_query.has_next
     )
 
 

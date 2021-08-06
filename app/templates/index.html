@@ -14,17 +14,35 @@
     <h2>Posts</h2>
 
     <div class="grid-container">
-        {% for post in posts.values() %}
-            <figure class="card person-card">
-                <img src="{{ post.image }}" alt="Poster" class="card-img-top">
-                <figcaption class="card-body">
-                    <a href="/posts/{{ post.id }}" class="stretched-link">
-                        <h5 class="card-title">{{ post.title }}</h5>
-                    </a>
-                    {#                    <p class="card-text">{{ post.location }} </p>#}
-                </figcaption>
-            </figure>
-        {% endfor %}
+        {% if not posts %}
+            <h1>There are no posts yet :(</h1>
+        {% else %}
+            {% for post in posts %}
+                <figure class="card person-card">
+                    {#                <img src="{{ post.image }}" alt="Poster" class="card-img-top">#}
+                    <img src="/static/img/generic.png" alt="Poster" class="card-img-top">
+                    <figcaption class="card-body">
+                        <a href="/posts/{{ post.id }}" class="stretched-link">
+                            <h5 class="card-title">{{ post.title }}</h5>
+                        </a>
+                        {#                    <p class="card-text">{{ post.location }} </p>#}
+                    </figcaption>
+                </figure>
+            {% endfor %}
+        {% endif %}
+    </div>
+
+    <div class="container pt-5">
+        <div class="button-container">
+            {% if has_previous_page %}
+                <a class="btn btn-outline-primary" href="?page={{ current_page - 1 }}" role="button"><i
+                        class="bi bi-arrow-90deg-left"></i>&nbsp;&nbsp;Previous page</a>
+            {% endif %}
+            {% if has_next_page %}
+                <a class="btn btn-outline-primary ml-1" href="?page={{ current_page + 1 }}" role="button"><i
+                        class="bi bi-arrow-90deg-right"></i>&nbsp;&nbsp;Next page</a>
+            {% endif %}
+        </div>
     </div>
 </section>
 

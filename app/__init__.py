@@ -114,13 +114,16 @@ def get_post(post_id):
 
 
 @app.route("/posts/<post_id>/edit")
+@login_required
 def get_edit_post(post_id):
-    # TODO: query post from db
-    if post_id not in posts_info:
+    post = PostModel.query.filter_by(id=post_id).first()
+    if post is None:
         return abort(404)
-    title = posts_info[post_id]["title"]
+    if post.created_by != current_user.id:
+        return abort(403)
+
     return render_template(
-        "edit_post.html", item=posts_info[post_id], title=title, url=posts_base_url + post_id + "/edit"
+        "edit_post.html", post=post, title=post.title, url=posts_base_url + post_id + "/edit"
     )
 
 
@@ -134,8 +137,6 @@ def get_create_post():
         return render_template("login.html", title="Login")
 
 
-# TODO: Implement edit post endpoint
-
 @app.route("/posts", methods=["POST"])
 @login_required
 def create_post():
@@ -145,6 +146,25 @@ def create_post():
     db.session.add(new_post)
     db.session.commit()
     return redirect("https://localhost/posts/" + str(new_post.id))
+
+
+@app.route("/posts/<post_id>", methods=["POST"])
+@login_required
+def edit_post(post_id):
+    post = PostModel.query.filter_by(id=post_id).first()
+    if post is None:
+        return abort(404)
+    if post.created_by != current_user.id:
+        return abort(403)
+
+    new_title = request.form.get("title")
+    new_text = request.form.get("text")
+
+    post.title = new_title
+    post.text = new_text
+    db.session.commit()
+
+    return redirect("https://localhost/posts/" + str(post.id))
 
 
 @app.route("/health")

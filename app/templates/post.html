@@ -1,0 +1,25 @@
+{% include 'header.html' %}
+
+<main>
+    <div class="profile">
+        <div class="profile-picture">
+            <img class="rounded-circle" src="{{ post.image }}" alt="{{ post.title }}">
+        </div>
+        <h1>{{ post.title }}</h1>
+    </div>
+
+    <div class="container profile-info">
+        <section>
+            <p>{{ post.text }}</p>
+        </section>
+
+        <div class="button-container">
+            <a class="btn btn-outline-primary" href="/" role="button"><i class="bi bi-arrow-return-left"></i>&nbsp;&nbsp;Return
+                to home</a>
+        </div>
+    </div>
+</main>
+
+
+{% include 'footer.html' %}
+

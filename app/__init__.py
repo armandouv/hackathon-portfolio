@@ -43,27 +43,52 @@ class UserModel(db.Model):
 base_url = os.getenv("URL")
 posts_base_url = base_url + "/posts/"
 
+# TODO: This will be deleted since posts will be stored in the database
 posts_info = load_posts_info()
 
 
 @app.route("/")
 def index():
+    # TODO: Implement pagination
     return render_template(
         "index.html",
+        # TODO: query posts info page from db
         posts=posts_info,
         title="Blog",
         url=base_url,
     )
 
 
-@app.route("/profiles/<post_id>")
+@app.route("/posts/<post_id>")
 def get_post(post_id):
+    # TODO: query post from db
     if post_id not in posts_info:
         return abort(404)
-    title = "Post title"
+    title = posts_info[post_id]["title"]
     return render_template(
-        "profile.html", item=posts_info[post_id], title=title, url=posts_base_url + post_id
+        "post.html", post=posts_info[post_id], title=title, url=posts_base_url + post_id
     )
+
+
+@app.route("/posts/<post_id>/edit")
+def get_edit_post(post_id):
+    # TODO: query post from db
+    if post_id not in posts_info:
+        return abort(404)
+    title = posts_info[post_id]["title"]
+    return render_template(
+        "edit_post.html", item=posts_info[post_id], title=title, url=posts_base_url + post_id + "/edit"
+    )
+
+
+@app.route("/posts/new")
+def get_create_post():
+    return render_template(
+        "create_post.html", title="Create new post", url=posts_base_url + "new"
+    )
+
+
+# TODO: Implement create and edit post endpoints
 
 
 @app.route("/health")

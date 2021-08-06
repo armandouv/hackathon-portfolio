@@ -6,7 +6,8 @@ from flask.helpers import flash
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
-from data.load_data import load_projects, load_profiles
+
+# from data.load_data import load_projects, load_profiles
 from flask_login import (
     LoginManager,
     login_user,
@@ -78,12 +79,13 @@ def load_user(user_id):
     return UserModel.query.get(int(user_id))
 
 
+"""
 base_url = os.getenv("URL")
 projects_base_url = base_url + "/projects/"
 profiles_base_url = base_url + "/profiles/"
 
 projects = load_projects()
-profiles = load_profiles()
+profiles = load_profiles()"""
 
 
 @app.route("/")
@@ -97,6 +99,7 @@ def profile():
     return render_template("profile.html", name=current_user.name)
 
 
+"""
 @app.route("/projects/<name>")
 def get_project(name):
     if name not in projects:
@@ -113,7 +116,7 @@ def get_profile(name):
     title = name + "'s Profile"
     return render_template(
         "profile.html", item=profiles[name], title=title, url=profiles_base_url + name
-    )
+    )"""
 
 
 @app.route("/health")

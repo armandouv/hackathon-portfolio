@@ -1,6 +1,6 @@
-BASE_URL=https://armandouv.duckdns.org/
+BASE_URL=https://blogmlh.duckdns.org/
 CURRENT_URL=$BASE_URL
-NEW_USERNAME=$(openssl rand -base64 12)
+NEW_EMAIL=$(openssl rand -base64 12)
 NEW_PASSWORD=hola
 red=$(tput setaf 1)
 green=$(tput setaf 2)
@@ -44,29 +44,6 @@ print_url /gfsag
 echo "Invalid route:"
 expect_get_status 404
 
-# /profiles
-
-CURRENT_URL=${BASE_URL}profiles/Armando
-print_url /profiles/Armando
-echo "Valid profile:"
-expect_get_status 200
-
-CURRENT_URL=${BASE_URL}profiles/vfdasvg
-print_url /profiles/vfdasvg
-echo "Invalid profile:"
-expect_get_status 404
-
-# /projects
-
-CURRENT_URL=${BASE_URL}projects/Portfolio%20Project
-print_url /projects/Portfolio%20Project
-echo "Valid project:"
-expect_get_status 200
-
-CURRENT_URL=${BASE_URL}projects/vfdasvg
-print_url /projects/vfdasvg
-echo "Invalid project:"
-expect_get_status 404
 
 # /register
 
@@ -77,16 +54,17 @@ echo "Valid registration page:"
 expect_get_status 200
 
 echo "Valid user registration:"
-expect_post_status 200 "username=$NEW_USERNAME&password=hola"
+expect_post_status 200 "email=$NEW_EMAIL&password=$NEW_PASSWORD&firstname=hola&lastname=adios"
 
 echo "Invalid user registration (no username):"
 expect_post_status 418 "password=$NEW_PASSWORD"
 
 echo "Invalid user registration (no password):"
-expect_post_status 418 "username=$NEW_USERNAME"
+expect_post_status 418 "username=$NEW_EMAIL"
 
 echo "Invalid user registration (username already registered):"
-expect_post_status 418 "username=$NEW_USERNAME&password=$NEW_PASSWORD"
+expect_post_status 418 "email=$NEW_EMAIL&password=$NEW_PASSWORD&firstname=hola&lastname=adios"
+
 
 # /login
 
@@ -97,10 +75,10 @@ echo "Valid login page:"
 expect_get_status 200
 
 echo "Valid user login:"
-expect_post_status 200 "username=$NEW_USERNAME&password=$NEW_PASSWORD"
+expect_post_status 200 "username=$NEW_EMAIL&password=$NEW_PASSWORD"
 
 echo "Invalid user login (incorrect username):"
 expect_post_status 418 "username=FGSFD&password=$NEW_PASSWORD"
 
 echo "Invalid user login (incorrect password):"
-expect_post_status 418 "username=$NEW_USERNAME&password=invalid"
+expect_post_status 418 "username=$NEW_EMAIL&password=invalid"

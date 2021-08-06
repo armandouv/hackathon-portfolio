@@ -7,7 +7,7 @@ services:
     env_file:
       - .env
     volumes:
-      - .:/myportfolio
+      - .:/myblog
     depends_on:
       - db
 
@@ -17,6 +17,8 @@ services:
     restart: always
     env_file:
       - .env
+    volumes:
+      - my_database:/var/lib/postgresql/data
 
   nginx:
     container_name: nginx
@@ -46,5 +48,5 @@ services:
       - /var/lib/docker/:/var/lib/docker:ro
 
 volumes:
-  mydatabase:
+  my_database:
   nginx_secrets:

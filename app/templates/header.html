@@ -27,18 +27,29 @@
 
 <body>
 
-    <header class="nav-bar">
-        <div class="nav-content">
-            <a href="/">
-                <div class="nav-logo">
-                    <img src="/static/img/logo.svg" alt="logo"/>
-                </div>
-            </a>
-            <div class="header-buttons">
-                <a class="btn btn-outline-light" href="/login">Log in</a>
-                <a class="btn btn-warning ml-1" href="/register">Sign up</a>
+<header class="nav-bar">
+    <div class="nav-content">
+        <a href="/">
+            <div class="nav-logo">
+                <img src="/static/img/logo.svg" alt="logo"/>
             </div>
+        </a>
+        <div class="header-buttons">
+            <a class="btn btn-outline-light" href="/login">Log in</a>
+            <a class="btn btn-warning ml-1" href="/signup">Sign up</a>
         </div>
+    </div>
 
-    </header>
+</header>
+
+
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <ul class=flashes>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endwith %}
 

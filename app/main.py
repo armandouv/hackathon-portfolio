@@ -6,32 +6,27 @@ from data.load_data import load_projects, load_profiles
 from flask_login import login_required, current_user
 
 main = Blueprint("main", __name__)
-
+"""
 base_url = os.getenv("URL")
 projects_base_url = base_url + "/projects/"
 profiles_base_url = base_url + "/profiles/"
 
 projects = load_projects()
-profiles = load_profiles()
+profiles = load_profiles()"""
 
 
 @main.route("/")
 def index():
-    return render_template(
-        "index.html",
-        profiles=profiles,
-        projects=projects,
-        title="Team Kenargi's portfolio",
-        url=base_url,
-    )
+    return render_template("index.html", title="Team Kenargi's portfolio")
 
 
-@main.route('/profile')
+@main.route("/profile")
 @login_required
 def profile():
-    return render_template('profile.html', name=current_user.name)
+    return render_template("profile.html", name=current_user.name)
 
 
+"""
 @main.route("/projects/<name>")
 def get_project(name):
     if name not in projects:
@@ -48,7 +43,7 @@ def get_profile(name):
     title = name + "'s Profile"
     return render_template(
         "profile.html", item=profiles[name], title=title, url=profiles_base_url + name
-    )
+    )"""
 
 
 @main.route("/health")

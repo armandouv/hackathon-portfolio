@@ -12,8 +12,8 @@ from flask_login import (
     logout_user,
     login_required,
     current_user,
+    UserMixin,
 )
-from .models import UserModel
 from data.load_data import load_projects, load_profiles
 
 load_dotenv()
@@ -36,10 +36,34 @@ app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///db.sql"
 )"""
 
 db.init_app(app)
+migrate = Migrate(app, db)
 
 login_manager = LoginManager()
 login_manager.login_view = "auth.login"
 login_manager.init_app(app)
+
+
+class UserModel(UserMixin, db.Model):
+    __tablename__ = "users"
+    id = db.Column(
+        db.Integer, primary_key=True
+    )  # primary keys are required by SQLAlchemy
+    email = db.Column(db.String(100), unique=True)
+    firstname = db.Column(db.String(1000))
+    lastname = db.Column(db.String(1000))
+    password = db.Column(db.String(100))
+
+
+class PostModel(UserMixin, db.Model):
+    __tablename__ = "post"
+    id_post = db.Column(
+        db.Integer, primary_key=True
+    )  # primary keys are required by SQLAlchemy
+    title = db.Column(db.String(100))
+    text = db.Column(db.String(1000))
+    creation_date = db.Column(db.DateTime)
+    modification_date = db.Column(db.DateTime)
+    created_by = db.Column(db.ForeignKey("users.id"))
 
 
 @login_manager.user_loader
@@ -48,27 +72,12 @@ def load_user(user_id):
     return UserModel.query.get(int(user_id))
 
 
-"""
-# blueprint for auth routes in our app
-from .auth import auth as auth_blueprint
-
-app.register_blueprint(auth_blueprint)
-
-# blueprint for non-auth parts of app
-from .main import main as main_blueprint
-
-app.register_blueprint(main_blueprint)"""
-
-migrate = Migrate(app, db)
-
-
 base_url = os.getenv("URL")
 projects_base_url = base_url + "/projects/"
 profiles_base_url = base_url + "/profiles/"
 
 projects = load_projects()
 profiles = load_profiles()
-# return app
 
 
 @app.route("/")

@@ -1,14 +1,5 @@
 from flask_login import UserMixin
-from app import db
-
-"""
-class User(db.Model):
-    id = db.Column(
-        db.Integer, primary_key=True
-    )  # primary keys are required by SQLAlchemy
-    email = db.Column(db.String(100), unique=True)
-    password = db.Column(db.String(100))
-    name = db.Column(db.String(1000))"""
+from . import db
 
 
 class UserModel(UserMixin, db.Model):
@@ -20,18 +11,6 @@ class UserModel(UserMixin, db.Model):
     firstname = db.Column(db.String(1000))
     lastname = db.Column(db.String(1000))
     password = db.Column(db.String(100))
-    '''
-    __tablename__ = "users"
-
-    username = db.Column(db.String(), primary_key=True)
-    password = db.Column(db.String())
-
-    def __init__(self, username, password):
-        self.username = username
-        self.password = password
-
-    def __repr__(self):
-        return f"<User {self.username}>"'''
 
 
 class UserModel(UserMixin, db.Model):

@@ -1,0 +1,26 @@
+{% include 'header.html' %}
+
+<main>
+    <div class="profile">
+        <h1>{{ post.title }}</h1>
+    </div>
+
+    <div class="container profile-info">
+        <section>
+            <p>{{ post.text }}</p>
+        </section>
+
+        <div class="button-container">
+            <a class="btn btn-outline-primary" href="/" role="button"><i class="bi bi-arrow-return-left"></i>&nbsp;&nbsp;Return
+                to home</a>
+            {% if current_user.is_authenticated and current_user.id == post.created_by %}
+                <a class="btn btn-danger ml-1" href="/posts/{{ post.id }}/delete">Delete post</a>
+                <a class="btn btn-primary ml-1" href="/posts/{{ post.id }}/edit">Edit post</a>
+            {% endif %}
+        </div>
+    </div>
+</main>
+
+
+{% include 'footer.html' %}
+

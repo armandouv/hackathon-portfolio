@@ -1,5 +1,5 @@
 from dotenv import load_dotenv
-from flask import Flask
+from flask import Flask, render_template
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
@@ -12,7 +12,7 @@ app = Flask(__name__)
 def create_app():
     app.config["SECRET_KEY"] = "t4{pt_+FS3T#G\Gfs/F"
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-    app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///db.sqlite"
+    app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///db.sql"
     """app.config[
         "SQLALCHEMY_DATABASE_URI"
     ] = "postgresql+psycopg2://{user}:{passwd}@{host}:{port}/{table}".format(
@@ -50,3 +50,8 @@ def create_app():
 
 
 migrate = Migrate(app, db)
+
+
+@app.route("/")
+def index():
+    return render_template("index.html", title="Team Kenargi's portfolio")

@@ -16,10 +16,11 @@ A blog website.
 
 ## Development
 
-Spin up Postgres Server
+Create a .env file using the example.env template
+
+Spin up a PostgreSQL Server and create a database with the characteristics you specified in the previous file
 
 Make sure you have python3 and pip installed
-
 
 Create and activate virtual environment using virtualenv
 ```bash
@@ -33,7 +34,7 @@ Use the package manager [pip](https://pip.pypa.io/en/stable/) to install all dep
 pip install -r requirements.txt
 ```
 
-## Deployment
+## Development and deployment using Docker
 
 Create a .env file using the example.env template
 

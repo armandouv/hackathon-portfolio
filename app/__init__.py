@@ -1,7 +1,7 @@
 import os
 
 from dotenv import load_dotenv
-from flask import Flask, render_template, abort, request, redirect, flash
+from flask import Flask, render_template, abort, request, redirect, flash, url_for
 from flask_login import (
     LoginManager,
     UserMixin, login_user, login_required, logout_user, current_user,
@@ -151,7 +151,7 @@ def create_post():
     new_post = PostModel(title, text, current_user.id)
     db.session.add(new_post)
     db.session.commit()
-    return redirect("https://localhost/posts/" + str(new_post.id))
+    return redirect(url_for("get_post", post_id=str(new_post.id)))
 
 
 @app.route("/posts/<post_id>", methods=["POST"])
@@ -170,7 +170,7 @@ def edit_post(post_id):
     post.text = new_text
     db.session.commit()
 
-    return redirect("https://localhost/posts/" + str(post.id))
+    return redirect(url_for("get_post", post_id=str(post.id)))
 
 
 @app.route("/posts/<post_id>/delete")
@@ -185,7 +185,7 @@ def delete_post(post_id):
     db.session.delete(post)
     db.session.commit()
 
-    return redirect("https://localhost")
+    return redirect(url_for("index"))
 
 
 @app.route("/health")
@@ -223,13 +223,13 @@ def signup():
             new_user = UserModel(email, generate_password_hash(password), firstname, lastname)
             db.session.add(new_user)
             db.session.commit()
-            return redirect("https://localhost/login")
+            return redirect(url_for("login"))
         else:
             flash(error)
-            return redirect("https://localhost/signup")
+            return redirect(url_for("signup"))
 
     if current_user.is_authenticated:
-        return redirect("https://localhost")
+        return redirect(url_for("index"))
     return render_template("signup.html", title="Sign up")
 
 
@@ -249,13 +249,13 @@ def login():
 
         if error is None:
             login_user(user, remember=remember)
-            return redirect("https://localhost")
+            return redirect(url_for("index"))
         else:
             flash("Please check your login details and try again.")
-            return redirect("https://localhost/login")
+            return redirect(url_for("login"))
 
     if current_user.is_authenticated:
-        return redirect("https://localhost")
+        return redirect(url_for("index"))
     return render_template("login.html", title="Login")
 
 
@@ -264,4 +264,4 @@ def login():
 def logout():
     # remove the username from the session if it's there
     logout_user()
-    return redirect("https://localhost")
+    return redirect(url_for("index"))

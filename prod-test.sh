@@ -47,23 +47,23 @@ expect_get_status 404
 
 # /register
 
-CURRENT_URL=${BASE_URL}register
-print_url /register
+CURRENT_URL=${BASE_URL}signup
+print_url /signup
 
 echo "Valid registration page:"
 expect_get_status 200
 
-echo "Valid user registration:"
-expect_post_status 200 "email=$NEW_EMAIL&password=$NEW_PASSWORD&firstname=hola&lastname=adios"
+echo "Valid user registration (redirection):"
+expect_post_status 302 "email=$NEW_EMAIL&password=$NEW_PASSWORD&firstname=hola&lastname=adios"
 
-echo "Invalid user registration (no username):"
-expect_post_status 418 "password=$NEW_PASSWORD"
-
-echo "Invalid user registration (no password):"
-expect_post_status 418 "username=$NEW_EMAIL"
-
-echo "Invalid user registration (username already registered):"
-expect_post_status 418 "email=$NEW_EMAIL&password=$NEW_PASSWORD&firstname=hola&lastname=adios"
+#echo "Invalid user registration (no username):"
+#expect_post_status 302 "password=$NEW_PASSWORD"
+#
+#echo "Invalid user registration (no password):"
+#expect_post_status 302 "username=$NEW_EMAIL"
+#
+#echo "Invalid user registration (username already registered):"
+#expect_post_status 302 "email=$NEW_EMAIL&password=$NEW_PASSWORD&firstname=hola&lastname=adios"
 
 
 # /login
@@ -74,11 +74,11 @@ print_url /login
 echo "Valid login page:"
 expect_get_status 200
 
-echo "Valid user login:"
-expect_post_status 200 "username=$NEW_EMAIL&password=$NEW_PASSWORD"
+echo "Valid user login (redirection):"
+expect_post_status 302 "username=$NEW_EMAIL&password=$NEW_PASSWORD"
 
-echo "Invalid user login (incorrect username):"
-expect_post_status 418 "username=FGSFD&password=$NEW_PASSWORD"
-
-echo "Invalid user login (incorrect password):"
-expect_post_status 418 "username=$NEW_EMAIL&password=invalid"
+#echo "Invalid user login (incorrect username):"
+#expect_post_status 302 "username=FGSFD&password=$NEW_PASSWORD"
+#
+#echo "Invalid user login (incorrect password):"
+#expect_post_status 302 "username=$NEW_EMAIL&password=invalid"

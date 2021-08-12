@@ -4,7 +4,11 @@ from dotenv import load_dotenv
 from flask import Flask, render_template, abort, request, redirect, flash, url_for
 from flask_login import (
     LoginManager,
-    UserMixin, login_user, login_required, logout_user, current_user,
+    UserMixin,
+    login_user,
+    login_required,
+    logout_user,
+    current_user,
 )
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
@@ -13,7 +17,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 
 load_dotenv()
 app = Flask(__name__)
-app.config['SECRET_KEY'] = os.getenv("SECRET_KEY")
+app.config["SECRET_KEY"] = os.getenv("SECRET_KEY")
 app.config[
     "SQLALCHEMY_DATABASE_URI"
 ] = "postgresql+psycopg2://{user}:{passwd}@{host}:{port}/{table}".format(
@@ -25,7 +29,7 @@ app.config[
 )
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
-db = SQLAlchemy(app, engine_options={'connect_args': {'connect_timeout': 10}})
+db = SQLAlchemy(app, engine_options={"connect_args": {"connect_timeout": 10}})
 migrate = Migrate(app, db)
 
 
@@ -96,7 +100,9 @@ def index():
         page = 1
 
     page = int(page)
-    posts_query = PostModel.query.order_by(PostModel.id.desc()).paginate(page, 12, False)
+    posts_query = PostModel.query.order_by(PostModel.id.desc()).paginate(
+        page, 12, False
+    )
 
     return render_template(
         "index.html",
@@ -105,7 +111,7 @@ def index():
         url=base_url,
         current_page=page,
         has_previous_page=posts_query.has_prev,
-        has_next_page=posts_query.has_next
+        has_next_page=posts_query.has_next,
     )
 
 
@@ -129,7 +135,10 @@ def get_edit_post(post_id):
         return abort(403)
 
     return render_template(
-        "edit_post.html", post=post, title=post.title, url=posts_base_url + post_id + "/edit"
+        "edit_post.html",
+        post=post,
+        title=post.title,
+        url=posts_base_url + post_id + "/edit",
     )
 
 
@@ -220,7 +229,9 @@ def signup():
             error = f"User {email} is already registered."
 
         if error is None:
-            new_user = UserModel(email, generate_password_hash(password), firstname, lastname)
+            new_user = UserModel(
+                email, generate_password_hash(password), firstname, lastname
+            )
             db.session.add(new_user)
             db.session.commit()
             return redirect(url_for("login"))
@@ -230,7 +241,7 @@ def signup():
 
     if current_user.is_authenticated:
         return redirect(url_for("index"))
-    return render_template("signup.html", title="Sign up")
+    return render_template("register_new.html", title="Sign up")
 
 
 @app.route("/login", methods=("GET", "POST"))
@@ -256,7 +267,7 @@ def login():
 
     if current_user.is_authenticated:
         return redirect(url_for("index"))
-    return render_template("login.html", title="Login")
+    return render_template("login_new.html", title="Login")
 
 
 @app.route("/logout")

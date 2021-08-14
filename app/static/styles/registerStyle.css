@@ -22,7 +22,9 @@ body {
 .nav-bar {
   width: 100%;
   display: flex;
-  background-color: #1c539f;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  background-color: rgba(0, 128, 255, 0.5);
   font-family: "Roboto", serif;
   font-weight: 700 !important;
   padding: 1.3em 3em;
@@ -118,7 +120,9 @@ footer {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  background-color: #1c539f;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  background-color: rgba(0, 128, 255, 0.5);
 }
 
 footer h4 {

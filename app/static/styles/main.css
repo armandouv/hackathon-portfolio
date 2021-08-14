@@ -27,7 +27,7 @@ body {
   display: flex;
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
-  background-color: rgba(0, 128, 255, 0.5);
+  background-color: #0955a3;
   font-family: "Roboto", serif;
   font-weight: 700 !important;
   padding: 1.3em 3em;
@@ -133,7 +133,7 @@ footer {
   align-items: center;
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
-  background-color: rgba(0, 128, 255);
+  background-color: #0955a3;
 }
 
 footer h4 {

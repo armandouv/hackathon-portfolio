@@ -61,7 +61,9 @@ class PostModel(db.Model):
     title = db.Column(db.String(1000))
     text = db.Column(db.String(1000))
     creation_date = db.Column(DateTime(timezone=True), server_default=func.now())
-    modification_date = db.Column(DateTime(timezone=True), server_default=func.now(), onupdate=func.now())
+    modification_date = db.Column(
+        DateTime(timezone=True), server_default=func.now(), onupdate=func.now()
+    )
     created_by = db.Column(db.ForeignKey("user.id"))
 
     def __init__(self, title, text, created_by):

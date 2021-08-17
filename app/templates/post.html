@@ -8,8 +8,8 @@
     <div class="container profile-info">
         <section>
             <p>{{ post.text }}</p>
-            <h5>Creation date: {{ post.creation_date }}</h5>
-            <h5>Last modification: {{ post.modification_date }}</h5>
+            <h5>Creation date: {{ post.creation_date.ctime() }}</h5>
+            <h5>Last modification: {{ post.modification_date.ctime() }}</h5>
         </section>
 
         <div class="button-container">

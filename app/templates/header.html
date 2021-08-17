@@ -37,8 +37,12 @@
         <div class="header-buttons">
             <a class="btn btn-outline-light" href="/">Home</a>
             &nbsp;&nbsp;
-            <a class="btn btn-outline-light" href="/login">Search Post</a>
+            <form method="post">
+                <input type="text" placeholder="Search Post" name="Post">
+                &nbsp;
+                <button id="btn btn-outline-light" type="submit">Search</button>
             &nbsp;&nbsp;
+            </form>
             <a class="btn btn-outline-light" href="/login">Profile</a>
             &nbsp;&nbsp;
             {% if current_user.is_authenticated %}

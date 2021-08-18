@@ -1,92 +1,33 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Sign Up</title>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
-        <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="../static/styles/loginStyles.css">
-        <script src="../static/js/app.js"></script>
-    </head>
-    <body>
-        <header class="nav-bar">
-            <div class="nav-content">
-                <a href="/">
-                    <div class="nav-logo">
-                        <img src="/static/img/logo.svg" alt="logo"/>
-                    </div>
-                </a>
-                <div class="header-buttons">
-                    <a class="btn btn-outline-light" href="/">Home</a>
-                    &nbsp;&nbsp;
-                    <form method="post">
-                        <input class="search-field" type="text" placeholder="Search Post" name="Post">
-                        &nbsp;
-                        <button class="btn btn-outline-light" type="submit">Search</button>
-                    &nbsp;&nbsp;
-                    </form>
-                    <a class="btn btn-outline-light" href="/login">Profile</a>
-                    &nbsp;&nbsp;
-                    {% if current_user.is_authenticated %}
-                        <a class="btn btn-danger" href="/logout">Log out</a>
-                        <a class="btn btn-primary ml-1" href="/posts/new">Create new post</a>
-                    {% else %}
-                        <a class="btn btn-outline-light" href="/login">Log in</a>
-                        <a class="btn btn-warning ml-1" href="/signup">Sign up</a>
-                    {% endif %}
-                </div>
+
+{% include 'header.html' %}
+
+<main>
+    <div class="contenedor__todo">
+        <div class="caja__trasera">
+            <div class="caja__trasera-login">
+                <h3>Have an account?</h3>
+                <p>Log in to access the site.</p>
+                <button>Log In</button>
             </div>
-        
-        </header>
-        {% with messages = get_flashed_messages() %}
-            {% if messages %}
-                <ul class=flashes>
-                    {% for message in messages %}
-                        <li>{{ message }}</li>
-                    {% endfor %}
-                </ul>
-            {% endif %}
-        {% endwith %}
-        <main>
-            <div class="contenedor__todo">
-                <div class="caja__trasera">
-                    <div class="caja__trasera-login">
-                        <h3>Have an account?</h3>
-                        <p>Log in to access the site.</p>
-                        <button>Log In</button>
-                    </div>
-                    <div class="caja__trasera-register">
-                        <h3>Have an account?</h3>
-                        <p>Log in to access the site.</p>
-                        <button id="btn__registrarse" onclick="location.href='/login'">Log In Site</button>
-                    </div>
-                </div>
-                <!--Formulario de Login y registro-->
-                <div class="contenedor__login-register">
-                    <!--Login-->
-                    <form method="post" class="formulario__login">
-                        <h2>Sign up</h2>
-                        <input type="email" placeholder="Enter email address" name="email">
-                        <input type="text" placeholder="Enter first name" name="firstname">
-                        <input type="text" placeholder="Enter last name" name="lastname">
-                        <input type="password" name="password" placeholder="Password">
-                        <button id="btn__iniciar-sesion" type="submit">Register</button>
-                    </form>
-                </div>
-                <br><br><br>
+            <div class="caja__trasera-register">
+                <h3>Have an account?</h3>
+                <p>Log in to access the site.</p>
+                <button id="btn__registrarse" onclick="location.href='/login'">Log In Site</button>
             </div>
-        </main>
-        <footer>
-            <div class="github-link-container">
-                <h4>Source code</h4>
-                <a href="https://github.com/NoMolestar/Project-3Weeks-Team2"><i class="bi bi-github "></i></a>
-            </div>
-        
-            <div>
-                <h4>Made with ❤️</h4>
-            </div>
-        </footer>
-    </body>
-</html>
+        </div>
+        <!--Formulario de Login y registro-->
+        <div class="contenedor__login-register">
+            <!--Login-->
+            <form method="post" class="formulario__login">
+                <h2>Sign up</h2>
+                <input type="email" placeholder="Enter email address" name="email">
+                <input type="text" placeholder="Enter first name" name="firstname">
+                <input type="text" placeholder="Enter last name" name="lastname">
+                <input type="password" name="password" placeholder="Password">
+                <button id="btn__iniciar-sesion" type="submit">Register</button>
+            </form>
+        </div>
+        <br><br><br>
+    </div>
+</main>
+{% include 'footer.html' %}

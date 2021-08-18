@@ -175,8 +175,7 @@ h3 {
 .search-field {
   background-color: #0955a3;
   color: white;
-  color: white;
-  height: 36px;
+  size: inherit;
 }
 
 /** Profile **/

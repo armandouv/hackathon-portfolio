@@ -10,9 +10,9 @@ from flask_login import (
     logout_user,
     current_user,
 )
+from flask_mail import Mail, Message
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
-from flask_mail import Mail, Message
 from sqlalchemy import DateTime, func
 from werkzeug.security import generate_password_hash, check_password_hash
 
@@ -76,17 +76,18 @@ class PostModel(db.Model):
         return f"<Post {self.title}>"
 
 
-# Configuration for flask_mail 
-# This setup is specifically for gmail, other email servers have different configuration settings 
-app.config['MAIL_SERVER'] = "smtp.gmail.com"
-app.config['MAIL_PORT'] = 587
-app.config['MAIL_USE_TLS'] = True
-app.config['MAIL_USE_SSL'] = False
-# These need to be setup in .env file 
-app.config['MAIL_USERNAME'] = os.getenv("EMAIL")
-app.config['MAIL_PASSWORD'] = os.getenv("EMAIL_PASSWORD")
+# Configuration for flask_mail
+# This setup is specifically for gmail,
+# other email servers have different configuration settings
+app.config["MAIL_SERVER"] = "smtp.gmail.com"
+app.config["MAIL_PORT"] = 587
+app.config["MAIL_USE_TLS"] = True
+app.config["MAIL_USE_SSL"] = False
+# These need to be setup in .env file
+app.config["MAIL_USERNAME"] = os.getenv("EMAIL")
+app.config["MAIL_PASSWORD"] = os.getenv("EMAIL_PASSWORD")
 
-# Emails are managed through a mail instance 
+# Emails are managed through a mail instance
 mail = Mail(app)
 
 db.init_app(app)
@@ -113,34 +114,36 @@ def index():
     if page and not page.isdigit():
         return abort(404)
 
-    if page is None:
-        page = 1
+    page = 1 if page is None else page
 
     page = int(page)
     posts_query = PostModel.query.order_by(PostModel.id.desc()).paginate(
         page, 12, False
     )
-    
-    
-    if request.method == "POST":
-        # Get form data 
-        name = request.form.get('name')
-        email = request.form.get('email')
-        message = request.form.get('message')
 
-        # Compose email and send 
-        msg = Message(subject=f"Mail from {name}", body=f"Name: {name}\nEmail: {email}\n\nMessage: {message}", recipients=[os.getenv("EMAIL")], sender=os.getenv("EMAIL"))
+    if request.method == "POST":
+        # Get form data
+        name = request.form.get("name")
+        email = request.form.get("email")
+        message = request.form.get("message")
+
+        # Compose email and send
+        msg = Message(
+            subject=f"Mail from {name}",
+            body=f"Name: {name}\nEmail: {email}\n\nMessage: {message}",
+            recipients=[os.getenv("EMAIL")],
+            sender=os.getenv("EMAIL"),
+        )
         mail.send(msg)
         return render_template(
-        "index.html",
-        posts=posts_query.items,
-        title="Blog",
-        url=base_url,
-        current_page=page,
-        has_previous_page=posts_query.has_prev,
-        has_next_page=posts_query.has_next,
+            "index.html",
+            posts=posts_query.items,
+            title="Blog",
+            url=base_url,
+            current_page=page,
+            has_previous_page=posts_query.has_prev,
+            has_next_page=posts_query.has_next,
         )
-    
 
     return render_template(
         "index.html",

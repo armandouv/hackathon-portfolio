@@ -213,7 +213,16 @@ footer a {
 .search-field {
   background-color: #0955a3;
   color: white;
-  size: inherit;
+  height: 39px;
+  border-color: white;
+}
+
+.search-field::-ms-input-placeholder {
+  color: white;
+}
+
+.search-field::placeholder {
+  color: white;
 }
 
 @media screen and (max-width: 850px) {

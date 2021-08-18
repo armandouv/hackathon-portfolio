@@ -20,15 +20,13 @@
                 </a>
                 <div class="header-buttons">
                     <a class="btn btn-outline-light" href="/">Home</a>
-                    &nbsp;
+                    &nbsp;&nbsp;
                     <form method="post">
                         <input class="search-field" type="text" placeholder="Search Post" name="Post">
                         &nbsp;
                         <button class="btn btn-outline-light" type="submit">Search</button>
-                    &nbsp;
+                    &nbsp;&nbsp;
                     </form>
-                    <a class="btn btn-outline-light" href="/login">Search Post</a>
-                    &nbsp;
                     <a class="btn btn-outline-light" href="/login">Profile</a>
                     &nbsp;
                     {% if current_user.is_authenticated %}

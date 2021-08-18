@@ -270,3 +270,12 @@ main {
     margin-left: 0.5rem;
   }
 }
+
+.contact-container {
+    background-color: #f5f5f9;
+    background-size: cover;
+    width: auto; 
+    overflow-x: hidden;
+    font-family: "Roboto", serif;
+    margin: 10px;
+}

@@ -1,0 +1,7 @@
+# prometheus.yml
+scrape_configs:
+  - job-name: cadvisor
+    scrape_interval: 5s
+    static_configs:
+      - targets:
+          - cadvisor:8080

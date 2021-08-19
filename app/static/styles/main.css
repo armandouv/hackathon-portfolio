@@ -85,7 +85,7 @@ body {
 }
 
 .profile {
-  background-color: #1d539f !important;
+  background-color: rgba(0, 128, 255, 0.5) !important;
   text-align: center;
 }
 

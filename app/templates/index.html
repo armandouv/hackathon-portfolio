@@ -1,7 +1,7 @@
 {% include 'header.html' %}
 
 <section class="container home-section">
-    <h2>Best blog in the world</h2>
+    <h1 class="headtitle">Best blog in the world</h1>
     <p>
         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad doloremque explicabo fuga reiciendis sequi sint
         sunt! Alias, autem dolorem doloribus ex excepturi nam quae quas quis, ratione, tempora totam voluptates.
@@ -15,7 +15,7 @@
 
     <div class="grid-container">
         {% if not posts %}
-            <h1>There are no posts yet :(</h1>
+            <h2>There are no posts yet :(</h1>
         {% else %}
             {% for post in posts %}
                 <figure class="card person-card">
@@ -35,7 +35,7 @@
     <div class="container pt-5">
         <div class="button-container">
             {% if has_previous_page %}
-                <a class="btn btn-outline-primary" href="?page={{ current_page - 1 }}" role="button"><i
+                <a class="btn btn-primary" href="?page={{ current_page - 1 }}" role="button"><i
                         class="bi bi-arrow-90deg-left"></i>&nbsp;&nbsp;Previous page</a>
             {% endif %}
             {% if has_next_page %}
@@ -48,7 +48,7 @@
 
 <div class="contact-container mt-5" id="contact">
     <div class="contact-form">
-        <h1 class="mb-3">Contact Us!</h1>
+        <h1 class="headtitle mb-3">Contact Us!</h1>
         <form method="POST">
             <h4 class="mb-3">Let's chat!</h4>
             <div class="mb-3">

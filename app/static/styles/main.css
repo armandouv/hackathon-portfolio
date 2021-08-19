@@ -38,7 +38,7 @@ body {
   display: flex;
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
-  background-color: #0955a3;
+  background-color: rgba(0, 128, 255, 0.5);
   font-family: "Roboto", serif;
   font-weight: 700 !important;
   padding: 1.3em 3em;
@@ -78,6 +78,10 @@ body {
   text-align: right;
   padding-top: 0;
   padding-right: 0;
+}
+
+.headtitle {
+  text-align: center;
 }
 
 .profile {
@@ -144,7 +148,7 @@ footer {
   align-items: center;
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
-  background-color: #0955a3;
+  background-color: rgba(0, 128, 255, 0.5);
 }
 
 footer h4 {

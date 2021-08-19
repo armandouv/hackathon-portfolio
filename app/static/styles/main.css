@@ -2,15 +2,18 @@
   box-sizing: border-box;
 }
 
-p,
-h1,
 h2,
+p {
+  color: white;
+}
+
+h1,
 h3,
 h4,
 h5,
 h6,
 button {
-  color: white;
+  color: black;
   font-family: "Roboto", serif;
 }
 
@@ -291,8 +294,6 @@ main {
 }
 
 .contact-container {
-  background-color: #f5f5f9;
-  background-size: cover;
   width: auto;
   overflow-x: hidden;
   font-family: "Roboto", serif;

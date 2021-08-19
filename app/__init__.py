@@ -324,8 +324,8 @@ def search():
 
     posts_query = (
         PostModel.query.filter(PostModel.title.like(search_query))
-            .order_by(PostModel.id.desc())
-            .paginate(page, 12, False)
+        .order_by(PostModel.id.desc())
+        .paginate(page, 12, False)
     )
 
     return render_template(

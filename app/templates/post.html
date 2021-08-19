@@ -7,13 +7,13 @@
 
     <div class="container profile-info">
         <section>
-            <p>{{ post.text }}</p>
-            <h5>Creation date: {{ post.creation_date.ctime() }}</h5>
-            <h5>Last modification: {{ post.modification_date.ctime() }}</h5>
+            <h5 class="date">{{ post.text }}</h5>
+            <p>Creation date: {{ post.creation_date.ctime() }}</p>
+            <p>Last modification: {{ post.modification_date.ctime() }}</p>
         </section>
 
         <div class="button-container">
-            <a class="btn btn-outline-primary" href="/" role="button"><i class="bi bi-arrow-return-left"></i>&nbsp;&nbsp;Return
+            <a class="btn btn-primary" href="/" role="button"><i class="bi bi-arrow-return-left"></i>&nbsp;&nbsp;Return
                 to home</a>
             {% if current_user.is_authenticated and current_user.id == post.created_by %}
                 <a class="btn btn-danger ml-1" href="/posts/{{ post.id }}/delete">Delete post</a>

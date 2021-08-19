@@ -311,6 +311,34 @@ def login():
     return render_template("login_new.html", title="Login")
 
 
+@app.route("/search")
+def search():
+    page = request.args.get("page")
+    if page and not page.isdigit():
+        return abort(404)
+    page = 1 if page is None else page
+    page = int(page)
+
+    title = request.args.get("title")
+    search_query = "%{}%".format(title)
+
+    posts_query = PostModel.query \
+        .filter(PostModel.title.like(search_query)) \
+        .order_by(PostModel.id.desc()) \
+        .paginate(page, 12, False)
+
+    return render_template(
+        "search.html",
+        posts=posts_query.items,
+        search=title,
+        title="Search: " + title,
+        url=base_url,
+        current_page=page,
+        has_previous_page=posts_query.has_prev,
+        has_next_page=posts_query.has_next,
+    )
+
+
 @app.route("/logout")
 @login_required
 def logout():

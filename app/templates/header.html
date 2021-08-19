@@ -37,11 +37,13 @@
         <div class="header-buttons">
             <a class="btn btn-outline-light" href="/">Home</a>
             &nbsp;&nbsp;
-            <form method="post">
-                <input class="search-field" type="text" placeholder="Search Post" name="Post">
+            <form action="/search">
+                <label>
+                    <input class="search-field" type="text" placeholder="Search post by title" name="title">
+                </label>
                 &nbsp;
                 <button class="btn btn-outline-light" type="submit">Search</button>
-            &nbsp;&nbsp;
+                &nbsp;&nbsp;
             </form>
             <a class="btn btn-outline-light" href="/login">Profile</a>
             &nbsp;&nbsp;

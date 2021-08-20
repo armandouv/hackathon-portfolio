@@ -67,5 +67,5 @@ Please make sure to update tests as appropriate.
 Here are some images of the instance where the project is being executed. This instance is hosted on an AWS server from Northern California.
 It uses the Linux operating system with the Cent OS 8 distribution.
 
-![Imagen 1 de la instancia](https://raw.githubusercontent.com/NoMolestar/Project-3Weeks-Team2/main/app/static/img/Instancia1.png)
-![Imagen 1 de la instancia](https://raw.githubusercontent.com/NoMolestar/Project-3Weeks-Team2/main/app/static/img/Instancia2.png)
+![Imagen 1 de la instancia](https://github.com/NoMolestar/Project-3Weeks-Team2/blob/main/app/static/img/Instancia1.PNG?raw=true)
+![Imagen 1 de la instancia](https://github.com/NoMolestar/Project-3Weeks-Team2/blob/main/app/static/img/Instancia2.PNG?raw=true)

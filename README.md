@@ -1,11 +1,10 @@
 # Blog website
-by Moisés, Armando, Oscar and Anthony from Pod 3.3.5
 
+by Moisés, Armando, Oscar and Anthony from Pod 3.3.5
 
 ## Description
 
 A blog website.
-
 
 ## Technologies Used
 
@@ -23,6 +22,7 @@ Spin up a PostgreSQL Server and create a database with the characteristics you s
 Make sure you have python3 and pip installed
 
 Create and activate virtual environment using virtualenv
+
 ```bash
 $ python -m venv python3-virtualenv
 $ source python3-virtualenv/bin/activate
@@ -40,8 +40,8 @@ Create a .env file using the example.env template
 
 Create a nginx-certbot.env file using the example-nginx-certbot.env template
 
-
 Start detached server using Docker Compose
+
 ```bash
 $ docker-compose up -d
 ```
@@ -49,14 +49,23 @@ $ docker-compose up -d
 ## Deployment with Github Actions
 
 Set up the following secrets:
+
 - DISCORD_WEBHOOK
 - PROJECT_ROOT
 - SSH_IP
 - SSH_PRIVATE_KEY
 - SSH_USER
 
-
 ## Contributing
+
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
 Please make sure to update tests as appropriate.
+
+## Instance screenshots
+
+Here are some images of the instance where the project is being executed. This instance is hosted on an AWS server from Northern California.
+It uses the Linux operating system with the Cent OS 8 distribution.
+
+![Imagen 1 de la instancia](https://raw.githubusercontent.com/NoMolestar/Project-3Weeks-Team2/main/app/static/img/Instancia1.png)
+![Imagen 1 de la instancia](https://raw.githubusercontent.com/NoMolestar/Project-3Weeks-Team2/main/app/static/img/Instancia2.png)

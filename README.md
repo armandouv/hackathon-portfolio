@@ -1,32 +1,28 @@
-<img src=https://img.shields.io/github/license/kendrajmoore/hackathon-portfolio>
-<p align="center">
- <img width="460" src="https://user-images.githubusercontent.com/51943194/121562739-98dd0680-c9ce-11eb-897a-579780e50c9a.jpg">
-</p>
+# Blog website
 
-# Team KENARGI Portfolio Webpage
-by Armando, Gigi, Kendra, Pod 3.3.5
-
-## Introduction
-
-Design and maintain a portfolio website for our open-source projects.
+by Moisés, Armando, Oscar and Anthony from Pod 3.3.5
 
 ## Description
 
-Working as a team, we created a website to track our projects and accomplishments. 
+A blog website.
 
 ## Technologies Used
 
 - Python-Flask
 - HTML
 - CSS
-- JSON
+- Postgres
 
-## Installation
+## Development
+
+Create a .env file using the example.env template
+
+Spin up a PostgreSQL Server and create a database with the characteristics you specified in the previous file
 
 Make sure you have python3 and pip installed
 
-
 Create and activate virtual environment using virtualenv
+
 ```bash
 $ python -m venv python3-virtualenv
 $ source python3-virtualenv/bin/activate
@@ -38,18 +34,38 @@ Use the package manager [pip](https://pip.pypa.io/en/stable/) to install all dep
 pip install -r requirements.txt
 ```
 
-## Usage
+## Development and deployment using Docker
 
 Create a .env file using the example.env template
 
+Create a nginx-certbot.env file using the example-nginx-certbot.env template
 
-Start flask development server
+Start detached server using Docker Compose
+
 ```bash
-$ export FLASK_ENV=development
-$ export URL=localhost:5000 
-$ flask run
+$ docker-compose up -d
 ```
+
+## Deployment with Github Actions
+
+Set up the following secrets:
+
+- DISCORD_WEBHOOK
+- PROJECT_ROOT
+- SSH_IP
+- SSH_PRIVATE_KEY
+- SSH_USER
+
 ## Contributing
+
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
 Please make sure to update tests as appropriate.
+
+## Instance screenshots
+
+Here are some images of the instance where the project is being executed. This instance is hosted on an AWS server from Northern California.
+It uses the Linux operating system with the Cent OS 8 distribution.
+
+![Imagen 1 de la instancia](https://github.com/NoMolestar/Project-3Weeks-Team2/blob/main/app/static/img/Instancia1.PNG?raw=true)
+![Imagen 1 de la instancia](https://github.com/NoMolestar/Project-3Weeks-Team2/blob/main/app/static/img/Instancia2.PNG?raw=true)

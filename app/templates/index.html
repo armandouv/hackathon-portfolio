@@ -1,59 +1,75 @@
 {% include 'header.html' %}
 
-<div class="profile">
-    <div class="profile-picture">
-        <img class="rounded-circle" src="/static/img/panturthawk.jpg" alt="Kenargi mascot">
+<section class="container home-section">
+    <h1 class="headtitle">Let's be creative!</h1>
+    <h4 class="headtitle">
+        Have fun and write about what you love.😊
+    </h4>
+</section>
+
+<section class="container home-section">
+    <h2>Posts</h2>
+
+    <div class="grid-container">
+        {% if not posts %}
+            <h2>There are no posts yet :(</h1>
+        {% else %}
+            {% for post in posts %}
+                <figure class="card person-card">
+                    {#                <img src="{{ post.image }}" alt="Poster" class="card-img-top">#}
+                    <img src="/static/img/generic.png" alt="Poster" class="card-img-top">
+                    <figcaption class="card-body">
+                        <a href="/posts/{{ post.id }}" class="stretched-link">
+                            <h5 class="card-title">{{ post.title }}</h5>
+                        </a>
+                        {#                    <p class="card-text">{{ post.location }} </p>#}
+                    </figcaption>
+                </figure>
+            {% endfor %}
+        {% endif %}
     </div>
-    <h1>Team Kenargi</h1>
+
+    <div class="container pt-5">
+        <div class="button-container">
+            {% if has_previous_page %}
+                <a class="btn btn-primary" href="?page={{ current_page - 1 }}" role="button"><i
+                        class="bi bi-arrow-90deg-left"></i>&nbsp;&nbsp;Previous page</a>
+            {% endif %}
+            {% if has_next_page %}
+                <a class="btn btn-primary" href="?page={{ current_page + 1 }}" role="button"><i
+                        class="bi bi-arrow-90deg-right"></i>&nbsp;&nbsp;Next page</a>
+            {% endif %}
+        </div>
+    </div>
+    <br>
+</section>
+
+<div class="contact-container mt-5" id="contact">
+    <div class="contact-form">
+        <h1 class="headtitle mb-3">Contact Us!</h1>
+        <form method="POST">
+            <h4 class="mb-3">Let's chat!</h4>
+            <div class="mb-3">
+                <label for="name-input" class="form-label">Name</label>
+                <input name="name" type="text" class="form-control" id="name-input" aria-describedby="nameHelp"
+                       required>
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Email address</label>
+                <input name="email" type="email" class="form-control" id="exampleInputEmail1"
+                       aria-describedby="emailHelp" required>
+            </div>
+            <div class="mb-3">
+                <label for="message-input" class="form-label">Message</label>
+                <textarea name="message" class="form-control" id="message-input" rows="3" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
+        crossorigin="anonymous"></script>
 </div>
-
-<section class="container home-section">
-    <h2>About Team Kenargi</h2>
-    <p>
-        Welcome to team Kenargi's portfolio. We are in the MLH Fellowship Production Engineering program (pod 3.3.5).
-        Our team name is Kenargi, a made-up word derived from the letters of our names. Our team mascot is a
-        panda-turtle-hawk to represent that 3 people are better than one, especially when working on production-grade
-        projects!
-    </p>
-</section>
-
-<section class="container home-section">
-    <h2>Introducing the team members</h2>
-
-    <div class="grid-container">
-        {% for profile in profiles.values() %}
-            <figure class="card person-card">
-                <img src="{{ profile.image }}" alt="Kenargi Member" class="card-img-top">
-                <figcaption class="card-body">
-                    <a href="/profiles/{{ profile.name }}" class="stretched-link">
-                        <h5 class="card-title">{{ profile.name }}</h5>
-                    </a>
-                    <p class="card-text">{{ profile.location }} </p>
-                </figcaption>
-            </figure>
-        {% endfor %}
-    </div>
-</section>
-
-
-<section class="container home-section">
-    <h2>Projects</h2>
-
-    <div class="grid-container">
-        {% for project in projects.values() %}
-            <figure class="card person-card">
-                <img src="{{ project.image }}" alt="Kenargi Project" class="card-img-top">
-                <figcaption class="card-body">
-                    <a href="/projects/{{ project.name }}" class="stretched-link">
-                        <h5 class="card-title">{{ project.name }}</h5>
-                    </a>
-                    <p class="card-text">{{ project.description }}</p>
-                </figcaption>
-            </figure>
-        {% endfor %}
-    </div>
-</section>
-
 
 {% include 'footer.html' %}
 

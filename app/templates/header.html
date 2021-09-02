@@ -4,7 +4,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta property="og:title" content="Personal Portfolio">
+    <meta property="og:title" content="Blog">
     <meta property="og:type" content="website">
     <meta property="og:description" content="Team Kenargi Portfolio">
     <meta property="og:url" content="{{ url }}">
@@ -27,18 +27,44 @@
 
 <body>
 
-    <header class="nav-bar">
-        <div class="nav-content">
-            <a href="/">
-                <div class="nav-logo">
-                    <img src="/static/img/logo.svg" alt="logo"/>
-                </div>
-            </a>
-            <div class="header-buttons">
-                <a class="btn btn-outline-light" href="/login">Log in</a>
-                <a class="btn btn-warning ml-1" href="/register">Sign up</a>
+<header class="nav-bar">
+    <div class="nav-content">
+        <a href="/">
+            <div class="nav-logo">
+                <img src="/static/img/logo.svg" alt="logo"/>
             </div>
+        </a>
+        <div class="header-buttons">
+            <a class="btn btn-outline-light" href="/">Home</a>
+            &nbsp;&nbsp;
+            <form action="/search">
+                <label>
+                    <input class="search-field" type="text" placeholder="Search post by title" name="title">
+                </label>
+                &nbsp;
+                <button class="btn btn-outline-light" type="submit">Search</button>
+                &nbsp;&nbsp;
+            </form>
+            {% if current_user.is_authenticated %}
+                <a class="btn btn-danger" href="/logout">Log out</a>
+                <a class="btn btn-primary ml-1" href="/posts/new">Create new post</a>
+            {% else %}
+                <a class="btn btn-outline-light" href="/login">Log in</a>
+                <a class="btn btn-warning ml-1" href="/signup">Sign up</a>
+            {% endif %}
         </div>
+    </div>
 
-    </header>
+</header>
+
+
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <ul class=flashes>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endwith %}
 

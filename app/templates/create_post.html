@@ -1,0 +1,24 @@
+{% include 'header.html' %}
+
+<main class="flex signup-container">
+    <section>
+        <h2>Create new post</h2>
+        <form action="/posts" method="post">
+            <div class="form-group">
+                <label for="inputTitle">Title</label>
+                <input type="text" class="form-control" id="inputTitle" name="title"
+                       placeholder="Enter post title">
+            </div>
+            <div class="form-group mt-3">
+                <label for="inputText">Post body</label>
+                <div>
+                    <textarea id="inputText" rows="5" cols="50" name="text"></textarea>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary mt-4">Submit</button>
+        </form>
+    </section>
+</main>
+
+
+{% include 'footer.html' %}

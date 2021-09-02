@@ -1,0 +1,33 @@
+
+{% include 'header_fix.html' %}
+
+<main class="body-container">
+    <div class="contenedor__todo">
+        <div class="caja__trasera">
+            <div class="caja__trasera-login">
+                <h2>Have an account?</h2>
+                <p>Log in to access the site.</p>
+                <button>Log In</button>
+            </div>
+            <div class="caja__trasera-register">
+                <h2>Have an account?</h2>
+                <p>Log in to access the site.</p>
+                <button id="btn__registrarse" onclick="location.href='/login'">Log In Site</button>
+            </div>
+        </div>
+        <!--Formulario de Login y registro-->
+        <div class="contenedor__login-register">
+            <!--Login-->
+            <form method="post" class="formulario__login">
+                <h2>Sign up</h2>
+                <input type="email" placeholder="Enter email address" name="email">
+                <input type="text" placeholder="Enter first name" name="firstname">
+                <input type="text" placeholder="Enter last name" name="lastname">
+                <input type="password" name="password" placeholder="Password">
+                <button id="btn__iniciar-sesion" type="submit">Register</button>
+            </form>
+        </div>
+        <br><br><br>
+    </div>
+</main>
+{% include 'footer.html' %}
